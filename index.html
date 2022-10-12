@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/styles.css">
+  <title>Web Worker</title>
+  <script src="~partytown/debug/partytown.js"></script>
+  <script>
+    partytown = {
+      debug: true,
+    };
+  </script>
+</head>
+<body>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Synchronous</th>
+        <th>Asynchronous</th>
+        <th>Worker</th>
+        <th>Partytown</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="sync"></td>
+        <td id="async"></td>
+        <td id="worker"></td>
+        <td id="partytownTime"></td>
+      </tr>
+      <tr>
+        <td id="syncInfo"></td>
+        <td id="asyncInfo"></td>
+        <td id="workerInfo"></td>
+        <td id="partytownInfo"></td>
+      </tr>
+      <tr>
+        <td>
+          <button id="syncRun">Run Test</button>
+        </td>
+        <td>
+          <button id="asyncRun">Run Test</button>
+        </td>
+        <td>
+          <button id="workerRun">Run Test</button>
+        </td>
+        <td>
+          <button id="partytownRun">Run Test</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script type="text/partytown" src="src/script-partytown.js"></script>
+  <script src="src/script.js"></script>
+</body>
+</html>
