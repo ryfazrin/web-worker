@@ -14,13 +14,32 @@ const syncInfo = [];
 const asyncInfo = [];
 const workerInfo = [];
 
+const timeBetween = 20;
+const iterateCount = 1000;
+const runCount = 10;
+const runs = [];
+
 SYNC_RUN.addEventListener('click', event => {
-  console.log(syncInfo);
   runSyncTest();
   syncInfo.forEach(info => {
     SYNC_INFO_ID.innerHTML += `<li>${info}</li>`
   });
 });
+
+const runSyncTest = () => {
+  const d = new Date().getTime();
+  SYNC.innerHTML = "Waiting for the response ...";
+  syncInfo.push("Waiting");
+
+
+  for (let i = 0; i < 1000; i += 1) { 
+    console.log(i)
+  }
+  for (let i = 0; i < 10e8; i += 1) { }
+  syncInfo.push("Receiving");
+
+  SYNC.innerHTML = new Date().getTime() - d + " ms";
+};
 
 ASYNC_RUN.addEventListener('click', () => {
   runAsyncTest();
@@ -29,21 +48,6 @@ ASYNC_RUN.addEventListener('click', () => {
 WORKER_RUN.addEventListener('click', _ => {
   runWorkerTest();
 });
-
-const runSyncTest = () => {
-  const d = new Date().getTime();
-  // setSyncTime("Waiting for the response ...");
-  SYNC.innerHTML = "Waiting for the response ...";
-  syncInfo.push("Waiting");
-
-
-  for (let i = 0; i < 10e8; i += 1) { }
-  for (let i = 0; i < 10e8; i += 1) { }
-  // setSyncTime("Received the result ...");
-  syncInfo.push("Receiving");
-
-  SYNC.innerHTML = new Date().getTime() - d + " ms";
-};
 
 const runAsyncTest = () => {
   const d = new Date().getTime();
