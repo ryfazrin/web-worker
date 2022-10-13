@@ -111,9 +111,9 @@ const runAsync = (tableId) => {
   }
 };
 
+const worker = new Worker("src/worker.js");
+
 const runWorker = (tableId) => {
-  const worker = new Worker("src/worker.js");
-  
   const sendData = 'anything';
   worker.postMessage(sendData);
 
