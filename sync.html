@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/styles.css">
+  <title>Sync</title>
+</head>
+<body>
+  <h1>Synchronous</h1>
+
+  <div>Main Load time: <span id="mainLoadTime"></span></div>
+
+  <div>Sync Execute time results: <span id="syncResult"></span></div>
+
+  <table border="0" id="results"></table>
+
+  <div id="output"></div>
+  
+  <script>
+  (() => {
+    const MAIN_LOAD_TIME = document.getElementById('mainLoadTime');
+    const SYNC_RESULT = document.getElementById('syncResult');
+    const RESULTS = document.getElementById('results');
+    const OUTPUT = document.getElementById('output');
+
+    const timeBetween = 20;
+    const iterateCount = 1000;
+    const runCount = 10;
+    const runs = [];
+
+    const test = (i) => {
+      const outer = document.createElement('div');
+      outer.setAttribute('attr', i);
+      outer.removeAttribute('attr');
+      outer.className = 'c' + i;
+      OUTPUT.appendChild(outer);
+
+      const inner = document.createElement('span');
+      inner.textContent = i;
+      inner.id = 'i' + i;
+      inner.classList.add('a');
+      inner.style.color = 'red';
+      inner.tabIndex = i;
+      outer.appendChild(inner);
+
+      inner.style.color;
+    };
+
+    const run = () => {
+      const start = performance.now();
+      console.log('start: ', start);
+      for (let i = 0; i < iterateCount; i++) {
+        test(i);
+      }
+      const duration = performance.now() - start;
+      console.log('end: ', performance.now());
+      runs.push(duration);
+
+      const runId = runs.length;
+
+      OUTPUT.textContent = '';
+
+      const resultTr = document.createElement('tr');
+      const resultTh = document.createElement('th');
+      resultTh.textContent = runId;
+      const resultTd = document.createElement('td');
+      resultTd.textContent = `${duration.toFixed(1)}ms`;
+      resultTr.appendChild(resultTh);
+      resultTr.appendChild(resultTd);
+      results.appendChild(resultTr);
+
+      if (runId < runCount) {
+        run();
+      } else {
+        const total = runs.reduce((t, dur) => {
+          t += dur;
+          return t;
+        }, 0);
+        const ave = total / runCount;
+        SYNC_RESULT.textContent = `${ave.toFixed(1)}ms`;
+        SYNC_RESULT.classList.add('completed');
+
+        // reset runs length
+        runs.length = 0;
+      }
+    }
+
+    run();
+
+    const loadTime = function(){
+      setTimeout(function(){
+        const perfData = window.performance.timing;
+        const EstimatedTime = (perfData.loadEventEnd - perfData.navigationStart);
+        console.log('perfData.domComplete: ', perfData.domComplete);
+        console.log('perfData.loadEventEnd: ', perfData.loadEventEnd);
+        console.log('perfData.navigationStart: ', perfData.navigationStart);
+        console.log('EstimatedTime: ', EstimatedTime);
+
+        MAIN_LOAD_TIME.textContent = `${EstimatedTime}ms`;
+
+        if(EstimatedTime>700){
+          // Something for load time more than 700 ms
+        }else{
+          // Something for faster load time
+        }
+      }, 10);  // Executes 10 ms after load has ended
+    };
+
+    window.addEventListener("load", () => {
+      const now = new Date().getTime();
+      const loadingTime = now - performance.timing.navigationStart;
+
+      MAIN_LOAD_TIME.innerText = `${loadingTime}ms`;
+
+      // loadTime();
+    }, false);
+  })();
+  </script>
+</body>
+</html>
