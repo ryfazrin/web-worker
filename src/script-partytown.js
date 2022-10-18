@@ -1,11 +1,11 @@
-(function () {
+(() => {
   const PARTYTOWN_RESULT = document.getElementById('partytownResult');
   const RESULTS = document.getElementById('results');
   const OUTPUT = document.getElementById('output');
 
   // PARTYTOWN_INFO_ID.innerHTML += `<li>This tag code execute by worker partytown. non-blocking code.</li>`;
 
-  // const timeBetween = 20;
+  const timeBetween = 20;
   const iterateCount = 1000;
   const runCount = 10;
   const runs = [];
@@ -51,7 +51,7 @@
     RESULTS.appendChild(resultTr);
 
     if (runId < runCount) {
-      run();
+      setTimeout(() => run(), timeBetween);
     } else {
       const total = runs.reduce((t, dur) => {
         t += dur;
@@ -60,12 +60,9 @@
       const ave = total / runCount;
       PARTYTOWN_RESULT.textContent = `${ave.toFixed(1)}ms`;
       PARTYTOWN_RESULT.classList.add('completed');
-
-      // reset runs length
-      runs.length = 0;
     }
   };
   
   
-  run(PARTYTOWN_INFO_ID);
+  setTimeout(() => run(), timeBetween);
 })();
