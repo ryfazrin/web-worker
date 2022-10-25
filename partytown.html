@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/styles.css">
+  <title>Partytown</title>
+  <script src="~partytown/debug/partytown.js"></script>
+  <script>
+    partytown = {
+      debug: true,
+    };
+  </script>
+</head>
+<body>
+  <h1>Partytown</h1>
+
+  <div>Main Load time: <span id="mainLoadTime"></span></div>
+
+  <div>Partytown Execute time results: <span id="partytownResult"></span></div>
+
+  <table border="0" id="results"></table>
+
+  <div id="output"></div>
+
+  <script type="text/partytown" src="src/script-partytown.js"></script>
+  <script>
+    const MAIN_LOAD_TIME = document.getElementById('mainLoadTime');
+
+    window.addEventListener("load", () => {
+      const now = new Date().getTime();
+      const loadingTime = now - performance.timing.navigationStart;
+
+      MAIN_LOAD_TIME.innerText = `${loadingTime}ms`;
+    }, false);
+  </script>
+</body>
+</html>

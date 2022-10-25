@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/styles.css">
+  <title>Async</title>
+</head>
+<body>
+  <h1>Asynchronous</h1>
+
+  <div>Main Load time: <span id="mainLoadTime"></span></div>
+
+  <div>Async Execute time results: <span id="asyncResult"></span></div>
+
+  <table border="0" id="results"></table>
+
+  <div id="output"></div>
+  
+  <script>
+  (() => {
+    const MAIN_LOAD_TIME = document.getElementById('mainLoadTime');
+    const ASYNC_RESULT = document.getElementById('asyncResult');
+    const RESULTS = document.getElementById('results');
+    const OUTPUT = document.getElementById('output');
+
+    const timeBetween = 20;
+    const iterateCount = 1000;
+    const runCount = 10;
+    const runs = [];
+
+    const test = (i) => {
+      const outer = document.createElement('div');
+      outer.setAttribute('attr', i);
+      outer.removeAttribute('attr');
+      outer.className = 'c' + i;
+      OUTPUT.appendChild(outer);
+
+      const inner = document.createElement('span');
+      inner.textContent = i;
+      inner.id = 'i' + i;
+      inner.classList.add('a');
+      inner.style.color = 'red';
+      inner.tabIndex = i;
+      outer.appendChild(inner);
+
+      inner.style.color;
+    };
+
+    const run = () => {
+      const start = performance.now();
+      for (let i = 0; i < iterateCount; i++) {
+        test(i);
+      }
+      const duration = performance.now() - start;
+      runs.push(duration);
+
+      const runId = runs.length;
+
+      OUTPUT.textContent = '';
+
+      const resultTr = document.createElement('tr');
+      const resultTh = document.createElement('th');
+      resultTh.textContent = runId;
+      const resultTd = document.createElement('td');
+      resultTd.textContent = `${duration.toFixed(1)}ms`;
+      resultTr.appendChild(resultTh);
+      resultTr.appendChild(resultTd);
+      RESULTS.appendChild(resultTr);
+
+      if (runId < runCount) {
+        setTimeout(() => run(), timeBetween);
+      } else {
+        const total = runs.reduce((t, dur) => {
+          t += dur;
+          return t;
+        }, 0);
+        const ave = total / runCount;
+        ASYNC_RESULT.textContent = `${ave.toFixed(1)}ms`;
+        ASYNC_RESULT.classList.add('completed');
+
+        // reset runs length
+        runs.length = 0;
+      }
+    }
+
+    setTimeout(() => run(), timeBetween);
+
+    window.addEventListener("load", () => {
+      const now = new Date().getTime();
+      const loadingTime = now - performance.timing.navigationStart;
+
+      MAIN_LOAD_TIME.innerText = `${loadingTime}ms`;
+    }, false);
+  })();
+  </script>
+</body>
+</html>
