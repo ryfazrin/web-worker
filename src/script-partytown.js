@@ -1,12 +1,11 @@
-(function () {
-  const PARTYTOWN_TIME = document.getElementById('partytownTime');
-  const PARTYTOWN_RUN = document.getElementById('partytownRun');
-  const PARTYTOWN_INFO_ID = document.getElementById('partytownInfo');
+(() => {
+  const PARTYTOWN_RESULT = document.getElementById('partytownResult');
+  const RESULTS = document.getElementById('results');
   const OUTPUT = document.getElementById('output');
 
-  PARTYTOWN_INFO_ID.innerHTML += `<li>This tag code execute by worker partytown. non-blocking code.</li>`;
+  // PARTYTOWN_INFO_ID.innerHTML += `<li>This tag code execute by worker partytown. non-blocking code.</li>`;
 
-  // const timeBetween = 20;
+  const timeBetween = 20;
   const iterateCount = 1000;
   const runCount = 10;
   const runs = [];
@@ -29,8 +28,8 @@
     inner.style.color;
   };
 
-  const runSync = (tableId) => {
-    PARTYTOWN_TIME.textContent = 'Running...';
+  const run = () => {
+    PARTYTOWN_RESULT.textContent = 'Running...';
     const start = performance.now();
     for (let i = 0; i < iterateCount; i++) {
       test(i);
@@ -49,25 +48,21 @@
     resultTd.textContent = `${duration.toFixed(1)}ms`;
     resultTr.appendChild(resultTh);
     resultTr.appendChild(resultTd);
-    tableId.appendChild(resultTr);
+    RESULTS.appendChild(resultTr);
 
     if (runId < runCount) {
-      runSync(tableId);
+      setTimeout(() => run(), timeBetween);
     } else {
       const total = runs.reduce((t, dur) => {
         t += dur;
         return t;
       }, 0);
       const ave = total / runCount;
-      PARTYTOWN_TIME.textContent = `${ave.toFixed(1)}ms`;
-      PARTYTOWN_TIME.classList.add('completed');
-
-      // reset runs length
-      runs.length = 0;
+      PARTYTOWN_RESULT.textContent = `${ave.toFixed(1)}ms`;
+      PARTYTOWN_RESULT.classList.add('completed');
     }
   };
   
-  PARTYTOWN_RUN.addEventListener('click', _ => {
-    runSync(PARTYTOWN_INFO_ID);
-  });
+  
+  setTimeout(() => run(), timeBetween);
 })();
