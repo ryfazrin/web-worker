@@ -5,105 +5,57 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="src/styles.css">
-  <title>Web Worker</title>
-  <script src="~partytown/debug/partytown.js"></script>
-  <script>
-    partytown = {
-      debug: true,
-    };
-  </script>
+  <title>Measure Thread</title>
 </head>
-<body onload="loadTime();">
-  <table>
-    <tr>
-      <td valign="top">
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Synchronous</th>
-              <th>Asynchronous</th>
-              <th>Worker</th>
-              <th>Partytown</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td id="sync"></td>
-              <td id="async"></td>
-              <td id="worker"></td>
-              <td id="partytownTime"></td>
-            </tr>
-            <tr>
-              <td>
-                <button id="syncRun">Run Test</button>
-              </td>
-              <td>
-                <button id="asyncRun">Run Test</button>
-              </td>
-              <td>
-                <button id="workerRun">Run Test</button>
-              </td>
-              <td>
-                <button id="partytownRun">Run Test</button>
-              </td>
-            </tr>
-            <tr valign="top">
-              <td>
-                <table border="0" id="syncInfo"></table>
-              </td>
-              <td>
-                <table border="0" id="asyncInfo"></table>
-              </td>
-              <td>
-                <table border="0" id="workerInfo"></table>
-              </td>
-              <td>
-                <table border="0" id="partytownInfo"></table>
-                <div ></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-
-      <td valign="top">
-        <h3>Execute Running</h3>
-        <div id="output"></div>
-      </td>
-    </tr>
+<body>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Synchronous</th>
+        <th>Asynchronous</th>
+        <th>Worker</th>
+        <th>Partytown</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href="sync.html" target="_blank">
+            <button id="syncRun">Run Test</button>
+          </a>
+        </td>
+        <td>
+          <a href="async.html" target="_blank">
+            <button id="asyncRun">Run Test</button>
+          </a>
+        </td>
+        <td>
+          <a href="worker.html" target="_blank">
+            <button id="workerRun">Run Test</button>
+          </a>
+        </td>
+        <td>
+          <a href="partytown.html" target="_blank">
+            <button id="partytownRun">Run Test</button>
+          </a>
+        </td>
+      </tr>
+      <tr valign="top">
+        <td>
+          <table border="0" id="syncInfo"></table>
+        </td>
+        <td>
+          <table border="0" id="asyncInfo"></table>
+        </td>
+        <td>
+          <table border="0" id="workerInfo"></table>
+        </td>
+        <td>
+          <table border="0" id="partytownInfo"></table>
+          <div ></div>
+        </td>
+      </tr>
+    </tbody>
   </table>
-
-  <script type="text/partytown" src="src/script-partytown.js"></script>
-  <script src="src/run-script.js"></script>
-  <script src="src/main.js"></script>
-  <script>
-    // const perfData = window.performance.timing;
-    // const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-    // console.log('perfData.loadEventEnd:', perfData.navigationStart);
-
-    // const renderTime = perfData.domComplete - perfData.domLoading;
-    // console.log('perfData.domComplete: ', perfData.domComplete);
-    // const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-    // console.log('perfData.loadEventEnd: ', perfData.loadEventEnd);
-    // console.log('perfData.navigationStart: ', perfData.navigationStart);
-    // console.log('pageLoadTime: ', pageLoadTime);
-
-    var loadTime = function(){
-      setTimeout(function(){
-        var perfData = window.performance.timing;
-        var EstimatedTime = (perfData.loadEventEnd - perfData.navigationStart);
-        console.log('perfData.domComplete: ', perfData.domComplete);
-        console.log('perfData.loadEventEnd: ', perfData.loadEventEnd);
-        console.log('perfData.navigationStart: ', perfData.navigationStart);
-        console.log('EstimatedTime: ', EstimatedTime);
-
-        if(EstimatedTime>700){
-          // Something for load time more than 700 ms
-        }else{
-          // Something for faster load time
-        }
-      }, 10);  // Executes 10 ms after load has ended
-    };
-  </script>
 </body>
 </html>
