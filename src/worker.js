@@ -6,7 +6,7 @@ this.addEventListener("message", event => {
   const counts = [];
   for (let i = 0; i < iterateCount; i++) {
     counts.push(i);
-    console.log(i);
+    this.postMessage({num: i});
   }
   
   const duration = performance.now() - start;

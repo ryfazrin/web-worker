@@ -56,6 +56,10 @@
 
       function workerJob (resolve, reject) {
         worker.addEventListener("message", event => {
+          console.log('Main thread:', event.data.num)
+          if (!event.data.duration) {
+            return
+          }
           const duration = event.data.duration;
           
           runs.push(Number(duration));
