@@ -56,10 +56,15 @@
 
       function workerJob (resolve, reject) {
         worker.addEventListener("message", event => {
-          console.log('Main thread:', event.data.num)
+          // write number in DOM
+          test(event.data.num);
+          // clean number
+          OUTPUT.textContent = '';
+
           if (!event.data.duration) {
-            return
+            return;
           }
+
           const duration = event.data.duration;
           
           runs.push(Number(duration));
@@ -73,13 +78,6 @@
           resultTr.appendChild(resultTh);
           resultTr.appendChild(resultTd);
           RESULTS.appendChild(resultTr);
-      
-          const testCount = event.data.counts;
-          testCount.forEach(item => {
-            test(item);
-          });
-      
-          OUTPUT.textContent = '';
 
           if (event !== null) {
             resolve(runId);
