@@ -5,60 +5,98 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="src/styles.css">
-  <title>Measure Thread</title>
+  <title>Website Performance Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <table border="1">
+  <h1>Website Performance Test</h1>
+  <table>
     <thead>
       <tr>
-        <th>Synchronous</th>
-        <th>Asynchronous</th>
-        <th>Worker</th>
-        <th>Partytown x Service Worker</th>
-        <th>Partytown x Atomics</th>
+        <th>Website</th>
+        <th>Performance Test</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td>WW Blog Pazrin</td>
         <td>
-          <a href="sync.html" target="_blank">
-            <button id="syncRun">Run Test</button>
-          </a>
-        </td>
-        <td>
-          <a href="async.html" target="_blank">
-            <button id="asyncRun">Run Test</button>
-          </a>
-        </td>
-        <td>
-          <a href="worker.html" target="_blank">
-            <button id="workerRun">Run Test</button>
-          </a>
-        </td>
-        <td>
-          <a href="partytown.html" target="_blank">
-            <button id="partytownRun">Run Test</button>
-          </a>
-        </td>
-        <td>
-          <a href="https://partytown-atomics.vercel.app/" target="_blank">
+          <a href="https://pagespeed.web.dev/?url=https://ww-blog-pazrin-io.vercel.app/" target="_blank">
             <button>Run Test</button>
           </a>
         </td>
       </tr>
-      <tr valign="top">
+      <tr>
+        <td>Blog Pazrin</td>
         <td>
-          <table border="0" id="syncInfo"></table>
+          <a href="https://pagespeed.web.dev/?url=https://blog-pazrin-io.vercel.app/" target="_blank">
+            <button>Run Test</button>
+          </a>
         </td>
+      </tr>
+      <tr>
+        <td>WW Company Profile Pazrin</td>
         <td>
-          <table border="0" id="asyncInfo"></table>
+          <a href="https://pagespeed.web.dev/?url=https://ww-company-profile-pazrin-io.vercel.app/" target="_blank">
+            <button>Run Test</button>
+          </a>
         </td>
+      </tr>
+      <tr>
+        <td>Company Profile Pazrin</td>
         <td>
-          <table border="0" id="workerInfo"></table>
+          <a href="https://pagespeed.web.dev/?url=https://company-profile-pazrin-io.vercel.app/" target="_blank">
+            <button>Run Test</button>
+          </a>
         </td>
+      </tr>
+      <tr>
+        <td>WW Ecommerce Pazrin</td>
         <td>
-          <table border="0" id="partytownInfo"></table>
-          <div ></div>
+          <a href="https://pagespeed.web.dev/?url=https://ww-ecommerce-pazrin-io.vercel.app/" target="_blank">
+            <button>Run Test</button>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Ecommerce Pazrin</td>
+        <td>
+          <a href="https://pagespeed.web.dev/?url=https://ecommerce-pazrin-io.vercel.app/" target="_blank">
+            <button>Run Test</button>
+          </a>
         </td>
       </tr>
     </tbody>
